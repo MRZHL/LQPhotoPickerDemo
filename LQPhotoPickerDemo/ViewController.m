@@ -11,7 +11,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<LQPhotoPickerViewDelegate>
 {
     
     //备注文本View高度
@@ -32,9 +32,19 @@
     tapGr.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGr];
     
-    self.showInView = _scrollView;
     
-    [self initPickerView];
+    /**
+     *  依次设置
+     */
+    self.LQPhotoPicker_superView = _scrollView;
+    
+    self.LQPhotoPicker_imgMaxCount = 10;
+    
+    [self LQPhotoPicker_initPickerView];
+    
+    self.LQPhotoPicker_delegate = self;
+    
+    
     
     [self initViews];
 }
@@ -105,11 +115,11 @@
     
     
     //photoPicker
-    [self updatePickerViewFrameY:_textNumberLabel.frame.origin.y + _textNumberLabel.frame.size.height];
+    [self LQPhotoPicker_updatePickerViewFrameY:_textNumberLabel.frame.origin.y + _textNumberLabel.frame.size.height];
     
     
     //说明文字
-    _explainLabel.frame = CGRectMake(0, [self getPickerViewFrame].origin.y+[self getPickerViewFrame].size.height+10, SCREENWIDTH, 20);
+    _explainLabel.frame = CGRectMake(0, [self LQPhotoPicker_getPickerViewFrame].origin.y+[self LQPhotoPicker_getPickerViewFrame].size.height+10, SCREENWIDTH, 20);
     
     
     //提交按钮
@@ -117,7 +127,7 @@
     _submitBtn.frame = CGRectMake(10, _explainLabel.frame.origin.y+_explainLabel.frame.size.height +30, SCREENWIDTH -20, 40);
     
     
-    allViewHeight = noteTextHeight + [self getPickerViewFrame].size.height + 30 + 100;
+    allViewHeight = noteTextHeight + [self LQPhotoPicker_getPickerViewFrame].size.height + 30 + 100;
     
     _scrollView.contentSize = self.scrollView.contentSize = CGSizeMake(0,allViewHeight);
 }
@@ -126,9 +136,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)pickerViewFrameChanged{
-    [self updateViewsFrame];
-}
+
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     
@@ -189,22 +197,23 @@
 
 #pragma mark - 上传数据到服务器前将图片转data（上传服务器用form表单：未写）
 - (void)submitToServer{
+    NSMutableArray *bigImageArray = [self LQPhotoPicker_getBigImageArray];
     //大图数据
-    NSArray *bigImageDataArray = [self getBigImageArray];
+    NSMutableArray *bigImageDataArray = [self LQPhotoPicker_getBigImageDataArray];
     
     //小图数组
-    NSArray *smallImageArray = self.imageArray;
+    NSMutableArray *smallImageArray = [self LQPhotoPicker_getSmallImageArray];
     
     //小图数据
-    NSMutableArray *smallImageDataArray = [NSMutableArray array];
-    for (UIImage *smallImg in smallImageArray) {
-        NSData *smallImgData = UIImagePNGRepresentation(smallImg);
-        [smallImageDataArray addObject:smallImgData];
-    }
+    NSMutableArray *smallImageDataArray = [self LQPhotoPicker_getSmallDataImageArray];
+    
+    
     
 }
 
-
+- (void)LQPhotoPicker_pickerViewFrameChanged{
+    [self updateViewsFrame];
+}
 
 @end
 

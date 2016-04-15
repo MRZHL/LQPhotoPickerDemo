@@ -7,8 +7,12 @@
 //
 
 #import "LQPhotoPickerViewController.h"
+#import "LQPhotoViewCell.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "LQImgPickerActionSheet.h"
+#import "JJPhotoManeger.h"
 
-@interface LQPhotoPickerViewController ()
+@interface LQPhotoPickerViewController ()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LQImgPickerActionSheetDelegate,JJPhotoDelegate>
 {
     NSString *pushImgName;
     
@@ -18,6 +22,11 @@
 
 @property(nonatomic,strong) LQImgPickerActionSheet *imgPickerActionSheet;
 
+@property(nonatomic,strong) UICollectionView *pickerCollectionView;
+@property(nonatomic,assign) CGFloat collectionFrameY;
+
+//图片选择器
+@property(nonatomic,strong) UIViewController *showActionSheetViewController;
 
 @end
 
@@ -40,14 +49,14 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     [super viewDidLoad];
 }
 
-- (void)initPickerView{
+- (void)LQPhotoPicker_initPickerView{
     _showActionSheetViewController = self;
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
     self.pickerCollectionView = [[UICollectionView alloc]initWithFrame:self.view.frame collectionViewLayout:layout];
     
-    if (_showInView) {
-        [_showInView addSubview:self.pickerCollectionView];
+    if (_LQPhotoPicker_superView) {
+        [_LQPhotoPicker_superView addSubview:self.pickerCollectionView];
     }
     else{
         [self.view addSubview:self.pickerCollectionView];
@@ -58,26 +67,27 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     self.pickerCollectionView.dataSource=self;
     self.pickerCollectionView.backgroundColor = [UIColor whiteColor];
     
-    if(_imageArray.count == 0)
+    if(_LQPhotoPicker_smallImageArray.count == 0)
     {
-        _imageArray = [NSMutableArray array];
+        _LQPhotoPicker_smallImageArray = [NSMutableArray array];
     }
-    if(_bigImageArray.count == 0)
+    if(_LQPhotoPicker_bigImageArray.count == 0)
     {
-        _bigImageArray = [NSMutableArray array];
+        _LQPhotoPicker_bigImageArray = [NSMutableArray array];
     }
     pushImgName = @"plus.png";
     
     _pickerCollectionView.scrollEnabled = NO;
+    
+    if (_LQPhotoPicker_imgMaxCount <= 0) {
+        _LQPhotoPicker_imgMaxCount = 10;
+    }
     
     //添加图片提示
     addImgStrLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 50, 70, 20)];
     addImgStrLabel.text = @"添加图片";
     addImgStrLabel.textColor = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1.0];
     [self.pickerCollectionView addSubview:addImgStrLabel];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -88,7 +98,7 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _imageArray.count+1;
+    return _LQPhotoPicker_smallImageArray.count+1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,12 +109,12 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     // Set up the reuse identifier
     LQPhotoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"LQPhotoViewCell" forIndexPath:indexPath];
 
-    if (indexPath.row == _imageArray.count) {
+    if (indexPath.row == _LQPhotoPicker_smallImageArray.count) {
         [cell.profilePhoto setImage:[UIImage imageNamed:pushImgName]];
         cell.closeButton.hidden = YES;
         
         //没有任何图片
-        if (_imageArray.count == 0) {
+        if (_LQPhotoPicker_smallImageArray.count == 0) {
             addImgStrLabel.hidden = NO;
         }
         else{
@@ -112,7 +122,7 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
         }
     }
     else{
-        [cell.profilePhoto setImage:_imageArray[indexPath.item]];
+        [cell.profilePhoto setImage:_LQPhotoPicker_smallImageArray[indexPath.item]];
         cell.closeButton.hidden = NO;
     }
     [cell setBigImgViewWithImage:nil];
@@ -148,7 +158,7 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     UIImageView *tableGridImage = (UIImageView*)gestureRecognizer.view;
     NSInteger index = tableGridImage.tag;
     
-    if (index == (_imageArray.count)) {
+    if (index == (_LQPhotoPicker_smallImageArray.count)) {
         [self.view endEditing:YES];
         //添加新图片
         [self addNewImg];
@@ -158,7 +168,7 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
         LQPhotoViewCell *cell = (LQPhotoViewCell*)[_pickerCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
         if (!cell.BigImgView || !cell.BigImgView.image) {
 
-            [cell setBigImgViewWithImage:[self getBigIamgeWithALAsset:_arrSelected[index]]];
+            [cell setBigImgViewWithImage:[self getBigIamgeWithALAsset:_LQPhotoPicker_selectedAssetArray[index]]];
         }
         
         JJPhotoManeger *mg = [JJPhotoManeger maneger];
@@ -169,32 +179,53 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
 
 #pragma mark - 选择图片
 - (void)addNewImg{
+    if (_LQPhotoPicker_smallImageArray.count == _LQPhotoPicker_imgMaxCount) {
+        UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@"提示"
+                             
+                                                      message:@"选择图片数量已达上限"
+                             
+                                                     delegate:nil
+                             
+                                            cancelButtonTitle:@"知道了"
+                             
+                                            otherButtonTitles:nil];  
+        
+        [alert show];
+        return;
+    }
+    
     if (!_imgPickerActionSheet) {
         _imgPickerActionSheet = [[LQImgPickerActionSheet alloc] init];
         _imgPickerActionSheet.delegate = self;
     }
-    if (_arrSelected) {
-        _imgPickerActionSheet.arrSelected = _arrSelected;
+    if (_LQPhotoPicker_selectedAssetArray) {
+        _imgPickerActionSheet.arrSelected = _LQPhotoPicker_selectedAssetArray;
     }
-    _imgPickerActionSheet.maxCount = _maxCount;
+    _imgPickerActionSheet.maxCount = _LQPhotoPicker_imgMaxCount;
     [_imgPickerActionSheet showImgPickerActionSheetInView:_showActionSheetViewController];
 }
 
 #pragma mark - 删除照片
 - (void)deletePhoto:(UIButton *)sender{
     
-    [_imageArray removeObjectAtIndex:sender.tag];
-    [_arrSelected removeObjectAtIndex:sender.tag];
+    [_LQPhotoPicker_smallImageArray removeObjectAtIndex:sender.tag];
+    [_LQPhotoPicker_selectedAssetArray removeObjectAtIndex:sender.tag];
 
     
     [self.pickerCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:sender.tag inSection:0]]];
     
-    for (NSInteger item = sender.tag; item <= _imageArray.count; item++) {
+    for (NSInteger item = sender.tag; item <= _LQPhotoPicker_smallImageArray.count; item++) {
         LQPhotoViewCell *cell = (LQPhotoViewCell*)[self.pickerCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:0]];
         cell.closeButton.tag--;
         cell.profilePhoto.tag--;
     }
-
+    //没有任何图片
+    if (_LQPhotoPicker_smallImageArray.count == 0) {
+        addImgStrLabel.hidden = NO;
+    }
+    else{
+        addImgStrLabel.hidden = YES;
+    }
     [self changeCollectionViewHeight];
 }
 
@@ -202,9 +233,9 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
 - (void)getSelectImgWithALAssetArray:(NSArray*)ALAssetArray thumbnailImgImageArray:(NSArray*)thumbnailImgArray{
     
     //（ALAsset）类型 Array
-    _arrSelected = [NSMutableArray arrayWithArray:ALAssetArray];
+    _LQPhotoPicker_selectedAssetArray = [NSMutableArray arrayWithArray:ALAssetArray];
     //正方形缩略图 Array
-    _imageArray = [NSMutableArray arrayWithArray:thumbnailImgArray] ;
+    _LQPhotoPicker_smallImageArray = [NSMutableArray arrayWithArray:thumbnailImgArray] ;
     
     [self.pickerCollectionView reloadData];
 }
@@ -213,22 +244,20 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
 - (void)changeCollectionViewHeight{
     
     if (_collectionFrameY) {
-        _pickerCollectionView.frame = CGRectMake(0, _collectionFrameY, [UIScreen mainScreen].bounds.size.width, (((float)[UIScreen mainScreen].bounds.size.width-64.0) /4.0 +20.0)* ((int)(_arrSelected.count)/4 +1)+20.0);
+        _pickerCollectionView.frame = CGRectMake(0, _collectionFrameY, [UIScreen mainScreen].bounds.size.width, (((float)[UIScreen mainScreen].bounds.size.width-64.0) /4.0 +20.0)* ((int)(_LQPhotoPicker_selectedAssetArray.count)/4 +1)+20.0);
     }
     else{
-        _pickerCollectionView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, (((float)[UIScreen mainScreen].bounds.size.width-64.0) /4.0 +20.0)* ((int)(_arrSelected.count)/4 +1)+20.0);
+        _pickerCollectionView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, (((float)[UIScreen mainScreen].bounds.size.width-64.0) /4.0 +20.0)* ((int)(_LQPhotoPicker_selectedAssetArray.count)/4 +1)+20.0);
     }
-    [self pickerViewFrameChanged];
-    
+    if (_LQPhotoPicker_delegate && [_LQPhotoPicker_delegate respondsToSelector:@selector(LQPhotoPicker_pickerViewFrameChanged)]) {
+        [_LQPhotoPicker_delegate LQPhotoPicker_pickerViewFrameChanged];
+    }
 }
 
-- (void)pickerViewFrameChanged{
-    
-}
-- (void)updatePickerViewFrameY:(CGFloat)Y{
+- (void)LQPhotoPicker_updatePickerViewFrameY:(CGFloat)Y{
     
     _collectionFrameY = Y;
-    _pickerCollectionView.frame = CGRectMake(0, Y, [UIScreen mainScreen].bounds.size.width, (((float)[UIScreen mainScreen].bounds.size.width-64.0) /4.0 +20.0)* ((int)(_arrSelected.count)/4 +1)+20.0);
+    _pickerCollectionView.frame = CGRectMake(0, Y, [UIScreen mainScreen].bounds.size.width, (((float)[UIScreen mainScreen].bounds.size.width-64.0) /4.0 +20.0)* ((int)(_LQPhotoPicker_selectedAssetArray.count)/4 +1)+20.0);
 }
 
 #pragma mark - 防止奔溃处理
@@ -237,14 +266,19 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     NSLog(@"最后一张观看的图片的index是:%zd",selecedImageViewIndex);
 }
 
-- (UIImage*)getBigIamgeWithALAsset:(ALAsset*)set{
-    //压缩
-    // 需传入方向和缩放比例，否则方向和尺寸都不对
+- (NSData*)getBigIamgeDataWithALAsset:(ALAsset*)set{
     UIImage *img = [UIImage imageWithCGImage:set.defaultRepresentation.fullResolutionImage
                                        scale:set.defaultRepresentation.scale
                                  orientation:(UIImageOrientation)set.defaultRepresentation.orientation];
-    NSData *imageData = UIImageJPEGRepresentation(img, 0.5);
-    [_bigImgDataArray addObject:imageData];
+    
+    return UIImageJPEGRepresentation(img, 0.5);
+}
+- (UIImage*)getBigIamgeWithALAsset:(ALAsset*)set{
+    //压缩
+    // 需传入方向和缩放比例，否则方向和尺寸都不对
+    NSData *imageData = [self getBigIamgeDataWithALAsset:set];
+    
+    [_LQPhotoPicker_bigImgDataArray addObject:imageData];
     
     return [UIImage imageWithData:imageData];
 }
@@ -262,35 +296,51 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     return compressedImage;
 }
 
-//获得大图
-- (NSArray*)getBigImageArrayWithALAssetArray:(NSArray*)ALAssetArray{
-    _bigImgDataArray = [NSMutableArray array];
-    NSMutableArray *bigImgArr = [NSMutableArray array];
-    for (ALAsset *set in ALAssetArray) {
-        [bigImgArr addObject:[self getBigIamgeWithALAsset:set]];
-    }
-    _bigImageArray = bigImgArr;
-    return _bigImgDataArray;
-}
+
 
 #pragma mark - 获得选中图片各个尺寸
-- (NSArray*)getALAssetArray{
-    return _arrSelected;
+- (NSMutableArray*)LQPhotoPicker_getALAssetArray{
+    return _LQPhotoPicker_selectedAssetArray;
 }
 
-- (NSArray*)getBigImageArray{
-    if (_bigImageArray.count>0) {
-        return _bigImageArray;
+- (NSMutableArray*)LQPhotoPicker_getBigImageArray{
+    if (_LQPhotoPicker_bigImageArray.count<=0) {
+        _LQPhotoPicker_bigImageArray = [NSMutableArray array];
+        _LQPhotoPicker_bigImgDataArray = [NSMutableArray array];
+        for (ALAsset *set in _LQPhotoPicker_selectedAssetArray) {
+            [_LQPhotoPicker_bigImageArray addObject:[self getBigIamgeWithALAsset:set]];
+        }
     }
     
-    return [self getBigImageArrayWithALAssetArray:_arrSelected];
+    return _LQPhotoPicker_bigImageArray;
 }
 
-- (NSArray*)getSmallImageArray{
-    return _imageArray;
+- (NSMutableArray*)LQPhotoPicker_getBigImageDataArray{
+    if (_LQPhotoPicker_bigImgDataArray<=0) {
+        _LQPhotoPicker_bigImageArray = [NSMutableArray array];
+        _LQPhotoPicker_bigImgDataArray = [NSMutableArray array];
+        for (ALAsset *set in _LQPhotoPicker_selectedAssetArray) {
+            [_LQPhotoPicker_bigImageArray addObject:[self getBigIamgeWithALAsset:set]];
+        }
+    }
+
+    return _LQPhotoPicker_bigImgDataArray;
 }
 
-- (CGRect)getPickerViewFrame{
+- (NSMutableArray*)LQPhotoPicker_getSmallImageArray{
+    return _LQPhotoPicker_smallImageArray;
+}
+- (NSMutableArray*)LQPhotoPicker_getSmallDataImageArray{
+    if (_LQPhotoPicker_smallDataImageArray.count<=0) {
+        _LQPhotoPicker_smallDataImageArray = [NSMutableArray array];
+        for (UIImage *smallImg in _LQPhotoPicker_smallImageArray) {
+            NSData *smallImgData = UIImagePNGRepresentation(smallImg);
+            [_LQPhotoPicker_smallDataImageArray addObject:smallImgData];
+        }
+    }
+    return _LQPhotoPicker_smallDataImageArray;
+}
+- (CGRect)LQPhotoPicker_getPickerViewFrame{
     return self.pickerCollectionView.frame;
 }
 @end

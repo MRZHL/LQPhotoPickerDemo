@@ -422,7 +422,6 @@
 				TargetAttributes = {
 					A40A89111C9E643C00C8AEBA = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = CTJ4CJS7DZ;
 					};
 				};
 			};
@@ -663,6 +662,7 @@
 				A40A892B1C9E643C00C8AEBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
