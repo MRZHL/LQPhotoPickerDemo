@@ -7,59 +7,52 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LQPhotoViewCell.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "LQImgPickerActionSheet.h"
-#import "JJPhotoManeger.h"
+
 
 @protocol LQPhotoPickerViewDelegate <NSObject>
 
 @optional
-
-
+- (void)LQPhotoPicker_pickerViewFrameChanged;
 
 @end
 
-@interface LQPhotoPickerViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LQImgPickerActionSheetDelegate,JJPhotoDelegate>
+@interface LQPhotoPickerViewController : UIViewController
 
-@property(nonatomic,assign) id<LQPhotoPickerViewDelegate> delegate;
+@property(nonatomic,assign) id<LQPhotoPickerViewDelegate> LQPhotoPicker_delegate;
 
-@property(nonatomic,strong) UICollectionView *pickerCollectionView;
-@property(nonatomic,assign) CGFloat collectionFrameY;
-
-//选择的图片数据()
-@property(nonatomic,strong) NSMutableArray *arrSelected;
+//选择的图片数据(ALAsset)
+@property(nonatomic,strong) NSMutableArray *LQPhotoPicker_selectedAssetArray;
 
 //方形压缩图image 数组
-@property(nonatomic,strong) NSMutableArray * imageArray;
+@property(nonatomic,strong) NSMutableArray * LQPhotoPicker_smallImageArray;
+//方形压缩图data 数组
+@property(nonatomic,strong,readonly) NSMutableArray * LQPhotoPicker_smallDataImageArray;
 
 //大图image 数组
-@property(nonatomic,strong) NSMutableArray * bigImageArray;
+@property(nonatomic,strong) NSMutableArray * LQPhotoPicker_bigImageArray;
+//大图data 数组
+@property(nonatomic,strong,readonly) NSMutableArray * LQPhotoPicker_bigImgDataArray;
 
-@property(nonatomic,strong) NSMutableArray * bigImgDataArray;
 
-//图片选择器
-@property(nonatomic,strong) UIViewController *showActionSheetViewController;
-
-//collectionView所在view
-@property(nonatomic,strong) UIView *showInView;
+//pickerView所在view
+@property(nonatomic,strong) UIView *LQPhotoPicker_superView;
 
 //图片总数量限制
-@property(nonatomic,assign) NSInteger maxCount;
+@property(nonatomic,assign) NSInteger LQPhotoPicker_imgMaxCount;
 
 
 //初始化collectionView
-- (void)initPickerView;
-//修改collectionView的位置
-- (void)updatePickerViewFrameY:(CGFloat)Y;
+- (void)LQPhotoPicker_initPickerView;
+//修改collectionView 的位置
+- (void)LQPhotoPicker_updatePickerViewFrameY:(CGFloat)Y;
 //获得collectionView 的 Frame
-- (CGRect)getPickerViewFrame;
+- (CGRect)LQPhotoPicker_getPickerViewFrame;
 
 //获取选中的所有图片信息
-- (NSArray*)getSmallImageArray;
-- (NSArray*)getBigImageArray;
-- (NSArray*)getALAssetArray;
-
-- (void)pickerViewFrameChanged;
+- (NSMutableArray*)LQPhotoPicker_getSmallImageArray;
+- (NSMutableArray*)LQPhotoPicker_getSmallDataImageArray;
+- (NSMutableArray*)LQPhotoPicker_getBigImageArray;
+- (NSMutableArray*)LQPhotoPicker_getBigImageDataArray;
+- (NSMutableArray*)LQPhotoPicker_getALAssetArray;
 
 @end
