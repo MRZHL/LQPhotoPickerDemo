@@ -149,6 +149,10 @@
     }
     
     [self textChanged];
+    
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+    }
     return YES;
 }
 
