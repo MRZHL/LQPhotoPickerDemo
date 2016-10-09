@@ -23,16 +23,26 @@
 
 #pragma mark - 显示选择照片提示sheet
 - (void)showImgPickerActionSheetInView:(UIViewController*)controller{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:nil
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:@"拍照", @"相册中选择",nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     viewController = controller;
-    [actionSheet showInView:viewController.view];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (!imaPic) {
+            imaPic = [[UIImagePickerController alloc] init];
+        }
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            imaPic.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imaPic.delegate = self;
+            [viewController presentViewController:imaPic animated:YES completion:nil];
+        }
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"相册中选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self loadImgDataAndShowAllGroup];
+    }]];
     
+    
+    [controller presentViewController:alertVC animated:YES completion:nil];
+
 }
 #pragma mark - 加载照片数据
 - (void)loadImgDataAndShowAllGroup{
@@ -57,23 +67,6 @@
     }];
 }
 
-#pragma mark - 选择（“拍照”，“相册选择”）
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        if (!imaPic) {
-            imaPic = [[UIImagePickerController alloc] init];
-        }
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            imaPic.sourceType = UIImagePickerControllerSourceTypeCamera;
-            imaPic.delegate = self;
-            [viewController presentViewController:imaPic animated:NO completion:nil];
-        }
-    }else if (buttonIndex == 1) {
-
-        [self loadImgDataAndShowAllGroup];
-    }
-}
 
 #pragma mark - 相机拍照得到的UIImage
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

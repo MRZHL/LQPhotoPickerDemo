@@ -34,5 +34,11 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>App需要您的同意才能读相机</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App需要您的同意才能读取媒体资料库</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App需要您的同意才能读取媒体资料库</string>
 </dict>
 </plist>

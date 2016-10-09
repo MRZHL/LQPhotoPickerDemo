@@ -29,7 +29,7 @@ typedef void (^menuSelectBlock)(id obj,menuSelectedType type);
 
 @end
 
-@interface LQImgPickerActionSheet : NSObject<UIImagePickerControllerDelegate,UIActionSheetDelegate,MShowAllGroupDelegate>
+@interface LQImgPickerActionSheet : NSObject<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate,MShowAllGroupDelegate>
 {
 
     UIImagePickerController *imaPic;

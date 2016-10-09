@@ -13,16 +13,11 @@
 		A40A89201C9E643C00C8AEBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A40A891E1C9E643C00C8AEBA /* Main.storyboard */; };
 		A40A89221C9E643C00C8AEBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A40A89211C9E643C00C8AEBA /* Assets.xcassets */; };
 		A40A89251C9E643C00C8AEBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A40A89231C9E643C00C8AEBA /* LaunchScreen.storyboard */; };
-		A40A896B1C9E648E00C8AEBA /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A892E1C9E648E00C8AEBA /* close.png */; };
 		A40A896C1C9E648E00C8AEBA /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A892F1C9E648E00C8AEBA /* close@2x.png */; };
 		A40A896D1C9E648E00C8AEBA /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89301C9E648E00C8AEBA /* close@3x.png */; };
-		A40A896E1C9E648E00C8AEBA /* ico_check_nomal.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89311C9E648E00C8AEBA /* ico_check_nomal.png */; };
-		A40A896F1C9E648E00C8AEBA /* ico_check_nomal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89321C9E648E00C8AEBA /* ico_check_nomal@2x.png */; };
 		A40A89701C9E648E00C8AEBA /* ico_check_nomal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89331C9E648E00C8AEBA /* ico_check_nomal@3x.png */; };
-		A40A89711C9E648E00C8AEBA /* ico_check_select.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89341C9E648E00C8AEBA /* ico_check_select.png */; };
 		A40A89721C9E648E00C8AEBA /* ico_check_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89351C9E648E00C8AEBA /* ico_check_select@2x.png */; };
 		A40A89731C9E648E00C8AEBA /* ico_check_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89361C9E648E00C8AEBA /* ico_check_select@3x.png */; };
-		A40A89741C9E648E00C8AEBA /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89371C9E648E00C8AEBA /* plus.png */; };
 		A40A89751C9E648E00C8AEBA /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89381C9E648E00C8AEBA /* plus@2x.png */; };
 		A40A89761C9E648E00C8AEBA /* plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40A89391C9E648E00C8AEBA /* plus@3x.png */; };
 		A40A89771C9E648E00C8AEBA /* MFlowLayOut.m in Sources */ = {isa = PBXBuildFile; fileRef = A40A893D1C9E648E00C8AEBA /* MFlowLayOut.m */; };
@@ -49,6 +44,7 @@
 		A40A898C1C9E648E00C8AEBA /* LQPhotoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40A896A1C9E648E00C8AEBA /* LQPhotoViewCell.xib */; };
 		A40A89C01C9E661100C8AEBA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40A89BF1C9E661100C8AEBA /* AssetsLibrary.framework */; };
 		A40A89C21C9E661F00C8AEBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40A89C11C9E661F00C8AEBA /* CoreGraphics.framework */; };
+		E6975DBF1DA89ABB00C8331D /* ico_check_nomal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6975DBE1DA89ABB00C8331D /* ico_check_nomal@2x.png */; };
 		E6F644EB1D61AD6B000FFE47 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F644EA1D61AD6B000FFE47 /* ImageIO.framework */; };
 		E6F6450E1D61AE7D000FFE47 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F644EE1D61AE7D000FFE47 /* MKAnnotationView+WebCache.m */; };
 		E6F6450F1D61AE7D000FFE47 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F644F01D61AE7D000FFE47 /* NSData+ImageContentType.m */; };
@@ -79,16 +75,11 @@
 		A40A89211C9E643C00C8AEBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A40A89241C9E643C00C8AEBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A40A89261C9E643C00C8AEBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A40A892E1C9E648E00C8AEBA /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		A40A892F1C9E648E00C8AEBA /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		A40A89301C9E648E00C8AEBA /* close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@3x.png"; sourceTree = "<group>"; };
-		A40A89311C9E648E00C8AEBA /* ico_check_nomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_check_nomal.png; sourceTree = "<group>"; };
-		A40A89321C9E648E00C8AEBA /* ico_check_nomal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_check_nomal@2x.png"; sourceTree = "<group>"; };
 		A40A89331C9E648E00C8AEBA /* ico_check_nomal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_check_nomal@3x.png"; sourceTree = "<group>"; };
-		A40A89341C9E648E00C8AEBA /* ico_check_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_check_select.png; sourceTree = "<group>"; };
 		A40A89351C9E648E00C8AEBA /* ico_check_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_check_select@2x.png"; sourceTree = "<group>"; };
 		A40A89361C9E648E00C8AEBA /* ico_check_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_check_select@3x.png"; sourceTree = "<group>"; };
-		A40A89371C9E648E00C8AEBA /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		A40A89381C9E648E00C8AEBA /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
 		A40A89391C9E648E00C8AEBA /* plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@3x.png"; sourceTree = "<group>"; };
 		A40A893C1C9E648E00C8AEBA /* MFlowLayOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFlowLayOut.h; sourceTree = "<group>"; };
@@ -135,6 +126,7 @@
 		A40A896A1C9E648E00C8AEBA /* LQPhotoViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQPhotoViewCell.xib; sourceTree = "<group>"; };
 		A40A89BF1C9E661100C8AEBA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A40A89C11C9E661F00C8AEBA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E6975DBE1DA89ABB00C8331D /* ico_check_nomal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_check_nomal@2x.png"; sourceTree = "<group>"; };
 		E6F644EA1D61AD6B000FFE47 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E6F644ED1D61AE7D000FFE47 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		E6F644EE1D61AE7D000FFE47 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -247,16 +239,12 @@
 		A40A892D1C9E648E00C8AEBA /* img */ = {
 			isa = PBXGroup;
 			children = (
-				A40A892E1C9E648E00C8AEBA /* close.png */,
 				A40A892F1C9E648E00C8AEBA /* close@2x.png */,
 				A40A89301C9E648E00C8AEBA /* close@3x.png */,
-				A40A89311C9E648E00C8AEBA /* ico_check_nomal.png */,
-				A40A89321C9E648E00C8AEBA /* ico_check_nomal@2x.png */,
 				A40A89331C9E648E00C8AEBA /* ico_check_nomal@3x.png */,
-				A40A89341C9E648E00C8AEBA /* ico_check_select.png */,
+				E6975DBE1DA89ABB00C8331D /* ico_check_nomal@2x.png */,
 				A40A89351C9E648E00C8AEBA /* ico_check_select@2x.png */,
 				A40A89361C9E648E00C8AEBA /* ico_check_select@3x.png */,
-				A40A89371C9E648E00C8AEBA /* plus.png */,
 				A40A89381C9E648E00C8AEBA /* plus@2x.png */,
 				A40A89391C9E648E00C8AEBA /* plus@3x.png */,
 			);
@@ -421,11 +409,12 @@
 		A40A890A1C9E643C00C8AEBA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "李庆";
 				TargetAttributes = {
 					A40A89111C9E643C00C8AEBA = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8V8QNTU33M;
 					};
 				};
 			};
@@ -455,21 +444,17 @@
 				A40A896D1C9E648E00C8AEBA /* close@3x.png in Resources */,
 				A40A89831C9E648E00C8AEBA /* MImaCell.xib in Resources */,
 				A40A89721C9E648E00C8AEBA /* ico_check_select@2x.png in Resources */,
-				A40A896F1C9E648E00C8AEBA /* ico_check_nomal@2x.png in Resources */,
 				A40A896C1C9E648E00C8AEBA /* close@2x.png in Resources */,
+				E6975DBF1DA89ABB00C8331D /* ico_check_nomal@2x.png in Resources */,
 				A40A89251C9E643C00C8AEBA /* LaunchScreen.storyboard in Resources */,
 				A40A89221C9E643C00C8AEBA /* Assets.xcassets in Resources */,
 				A40A89811C9E648E00C8AEBA /* MGroupCell.xib in Resources */,
-				A40A89741C9E648E00C8AEBA /* plus.png in Resources */,
-				A40A896B1C9E648E00C8AEBA /* close.png in Resources */,
-				A40A89711C9E648E00C8AEBA /* ico_check_select.png in Resources */,
 				A40A89731C9E648E00C8AEBA /* ico_check_select@3x.png in Resources */,
 				A40A89751C9E648E00C8AEBA /* plus@2x.png in Resources */,
 				A40A897E1C9E648E00C8AEBA /* none.png in Resources */,
 				A40A89701C9E648E00C8AEBA /* ico_check_nomal@3x.png in Resources */,
 				A40A898C1C9E648E00C8AEBA /* LQPhotoViewCell.xib in Resources */,
 				A40A89201C9E643C00C8AEBA /* Main.storyboard in Resources */,
-				A40A896E1C9E648E00C8AEBA /* ico_check_nomal.png in Resources */,
 				A40A89761C9E648E00C8AEBA /* plus@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,8 +541,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -579,7 +566,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -599,8 +586,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -616,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -628,7 +617,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8V8QNTU33M;
 				INFOPLIST_FILE = LQPhotoPickerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jack.LQPhotoPickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -640,7 +631,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8V8QNTU33M;
 				INFOPLIST_FILE = LQPhotoPickerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jack.LQPhotoPickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
