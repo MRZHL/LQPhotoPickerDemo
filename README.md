@@ -12,3 +12,34 @@
 ![](https://raw.githubusercontent.com/XZTLLQ/LQPhotoPickerDemo/master/REDMEIMG/IMG_0712.PNG)
 ![](https://raw.githubusercontent.com/XZTLLQ/LQPhotoPickerDemo/master/REDMEIMG/IMG_0713.PNG)
 ![](https://raw.githubusercontent.com/XZTLLQ/LQPhotoPickerDemo/master/REDMEIMG/IMG_0714.PNG)
+
+##使用方法
+  例子中使用的是storyboard方式加载，可以直接拷贝storyboard使用，然后调用:
+```
+  UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"StoryboardName" bundle:nil];  
+  VCClassName *VC = [storyBoard instantiateViewControllerWithIdentifier:@"VCClassName"];
+  //跳转
+```
+ 
+##Demo中的选择图片是个collectonView主要相关代码是：
+ ```
+     /**
+     *  依次设置
+     */
+    self.LQPhotoPicker_superView = _scrollView;
+    
+    self.LQPhotoPicker_imgMaxCount = 10;
+    
+    [self LQPhotoPicker_initPickerView];
+    
+    self.LQPhotoPicker_delegate = self;//LQPhotoPickerViewDelegate
+    
+    //photoPicker
+    [self LQPhotoPicker_updatePickerViewFrameY:200];
+```
+LQPhotoPickerViewDelegate:
+```
+    - (void)LQPhotoPicker_pickerViewFrameChanged{
+        //[self LQPhotoPicker_updatePickerViewFrameY:200];
+    }
+```
