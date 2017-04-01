@@ -304,25 +304,20 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
 }
 
 - (NSMutableArray*)LQPhotoPicker_getBigImageArray{
-    if (_LQPhotoPicker_bigImageArray.count<=0) {
-        _LQPhotoPicker_bigImageArray = [NSMutableArray array];
+    _LQPhotoPicker_bigImageArray = [NSMutableArray array];
         _LQPhotoPicker_bigImgDataArray = [NSMutableArray array];
         for (ALAsset *set in _LQPhotoPicker_selectedAssetArray) {
             [_LQPhotoPicker_bigImageArray addObject:[self getBigIamgeWithALAsset:set]];
         }
-    }
-    
     return _LQPhotoPicker_bigImageArray;
 }
 
 - (NSMutableArray*)LQPhotoPicker_getBigImageDataArray{
-    if (_LQPhotoPicker_bigImgDataArray<=0) {
-        _LQPhotoPicker_bigImageArray = [NSMutableArray array];
+    _LQPhotoPicker_bigImageArray = [NSMutableArray array];
         _LQPhotoPicker_bigImgDataArray = [NSMutableArray array];
         for (ALAsset *set in _LQPhotoPicker_selectedAssetArray) {
             [_LQPhotoPicker_bigImageArray addObject:[self getBigIamgeWithALAsset:set]];
         }
-    }
 
     return _LQPhotoPicker_bigImgDataArray;
 }
@@ -331,13 +326,11 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     return _LQPhotoPicker_smallImageArray;
 }
 - (NSMutableArray*)LQPhotoPicker_getSmallDataImageArray{
-    if (_LQPhotoPicker_smallDataImageArray.count<=0) {
-        _LQPhotoPicker_smallDataImageArray = [NSMutableArray array];
+    _LQPhotoPicker_smallDataImageArray = [NSMutableArray array];
         for (UIImage *smallImg in _LQPhotoPicker_smallImageArray) {
             NSData *smallImgData = UIImagePNGRepresentation(smallImg);
             [_LQPhotoPicker_smallDataImageArray addObject:smallImgData];
         }
-    }
     return _LQPhotoPicker_smallDataImageArray;
 }
 - (CGRect)LQPhotoPicker_getPickerViewFrame{
