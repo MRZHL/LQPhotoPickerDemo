@@ -303,35 +303,31 @@ static NSString * const reuseIdentifier = @"LQPhotoViewCell";
     return _LQPhotoPicker_selectedAssetArray;
 }
 
-- (NSMutableArray*)LQPhotoPicker_getBigImageArray{
+- (void)LQPhotoPicker_getBigImageArray{
     _LQPhotoPicker_bigImageArray = [NSMutableArray array];
         _LQPhotoPicker_bigImgDataArray = [NSMutableArray array];
         for (ALAsset *set in _LQPhotoPicker_selectedAssetArray) {
             [_LQPhotoPicker_bigImageArray addObject:[self getBigIamgeWithALAsset:set]];
         }
-    return _LQPhotoPicker_bigImageArray;
 }
 
-- (NSMutableArray*)LQPhotoPicker_getBigImageDataArray{
+- (void)LQPhotoPicker_getBigImageDataArray{
     _LQPhotoPicker_bigImageArray = [NSMutableArray array];
         _LQPhotoPicker_bigImgDataArray = [NSMutableArray array];
         for (ALAsset *set in _LQPhotoPicker_selectedAssetArray) {
             [_LQPhotoPicker_bigImageArray addObject:[self getBigIamgeWithALAsset:set]];
         }
-
-    return _LQPhotoPicker_bigImgDataArray;
 }
 
 - (NSMutableArray*)LQPhotoPicker_getSmallImageArray{
     return _LQPhotoPicker_smallImageArray;
 }
-- (NSMutableArray*)LQPhotoPicker_getSmallDataImageArray{
-    _LQPhotoPicker_smallDataImageArray = [NSMutableArray array];
+- (void)LQPhotoPicker_getSmallDataImageArray{
+    _LQPhotoPicker_smallImgDataArray = [NSMutableArray array];
         for (UIImage *smallImg in _LQPhotoPicker_smallImageArray) {
             NSData *smallImgData = UIImagePNGRepresentation(smallImg);
-            [_LQPhotoPicker_smallDataImageArray addObject:smallImgData];
+            [_LQPhotoPicker_smallImgDataArray addObject:smallImgData];
         }
-    return _LQPhotoPicker_smallDataImageArray;
 }
 - (CGRect)LQPhotoPicker_getPickerViewFrame{
     return self.pickerCollectionView.frame;

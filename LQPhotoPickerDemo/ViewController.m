@@ -201,15 +201,17 @@
 
 #pragma mark - 上传数据到服务器前将图片转data（上传服务器用form表单：未写）
 - (void)submitToServer{
-    NSMutableArray *bigImageArray = [self LQPhotoPicker_getBigImageArray];
-    //大图数据
-    NSMutableArray *bigImageDataArray = [self LQPhotoPicker_getBigImageDataArray];
-    
-    //小图数组
-    NSMutableArray *smallImageArray = [self LQPhotoPicker_getSmallImageArray];
-    
+
     //小图数据
-    NSMutableArray *smallImageDataArray = [self LQPhotoPicker_getSmallDataImageArray];
+    [self LQPhotoPicker_getSmallDataImageArray];
+    //大图数据
+    [self LQPhotoPicker_getBigImageDataArray];
+    
+//    for  ...  {
+//        self.LQPhotoPicker_smallImgDataArray[index]  //NSData 数据的 数组
+//        self.LQPhotoPicker_bigImgDataArray[index]  //NSData 数据的 数组
+//    }
+
     
     
     
