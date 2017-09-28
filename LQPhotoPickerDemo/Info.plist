@@ -40,5 +40,7 @@
 	<string>App需要您的同意才能读取媒体资料库</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要您的同意才能读取媒体资料库</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App需要您的同意才能读取媒体资料库</string>
 </dict>
 </plist>
